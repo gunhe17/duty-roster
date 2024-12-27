@@ -82,8 +82,8 @@ class DutyAssigner:
 
 
 class CleaningDutyApp:
-    def __init__(self, users: str, num_weeks: int):
-        self.user_names = [line.split("\t")[1] for line in users.strip().splitlines()]
+    def __init__(self, users: list, num_weeks: int):
+        self.user_names = users
         self.num_weeks = num_weeks
 
     def run(self):
@@ -115,27 +115,27 @@ class CleaningDutyApp:
 
 if __name__ == "__main__":
     CleaningDutyApp(
-        users="""
-1	김태형
-2	정재인
-3	안유민
-4	홍성균
-5	최지훈
-6	이현준
-7	이신실
-8	조수진
-9	소요섭
-10	안예린
-11	정영진
-12	홍혜린
-13	김민정
-14	전은아
-15	김건희
-16	김종원
-17	석정도
-18	최지혜
-19	김주한
-20	임소영
-        """,
+        users=[
+            "김태형", 
+            "정재인", 
+            "홍혜린", 
+            "소요섭", 
+            "홍성균", 
+            "이신실", 
+            "이재이", 
+            "정영진", 
+            "최지훈", 
+            "이현준", 
+            "안예린", 
+            "김건희", 
+            "김종원", 
+            "김주한", 
+            "조수진", 
+            "안유민", 
+            "전은아", 
+            "최지혜", 
+            "석정도", 
+            "임소영", 
+        ],
         num_weeks=5
     ).run()
