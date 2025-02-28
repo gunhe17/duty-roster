@@ -173,7 +173,7 @@ def run_selection():
     # 이번 달 선정된 직원의 ID를 기록 (한 직원은 한 달에 단 한 번만 선정)
     selected_this_month = set()
 
-    # 매 주마다 당번 선정
+    # 매 주마다 당번 선정 (한 주에 2명을 선정)
     weekly_results = []
     for week in range(1, weeks + 1):
         # eligible: input.json에 참여하며 아직 선정되지 않았고, 최근 두 달 연속 당번이 아니신 분
@@ -191,30 +191,39 @@ def run_selection():
             log_message(f"[WARN] 주차 {week}: 선정 가능한 직원이 없습니다. (조건에 맞는 직원이 부족합니다.)")
             continue
 
-        # 가중치 산출: 각 직원의 effective_count = max(duty_count, baseline)
-        # baseline: eligible 직원들의 duty_count 평균 (평균이 0이면 1로 대체)
-        total = sum(emp.get("duty_count", 0) for emp in eligible)
-        avg = total / len(eligible) if eligible else 0
-        baseline = avg if avg > 0 else 1
+        # 한 주에 최대 2명을 선정 (eligible 인원이 2명 미만이면 가능한 인원만 선정)
+        num_to_select = min(2, len(eligible))
+        selected_for_week = []
+        for _ in range(num_to_select):
+            # 매번 현재 eligible 목록에 대해 가중치 산출
+            total = sum(emp.get("duty_count", 0) for emp in eligible)
+            avg = total / len(eligible) if eligible else 0
+            baseline = avg if avg > 0 else 1
 
-        weights = []
-        for emp in eligible:
-            duty = emp.get("duty_count", 0)
-            effective = duty if duty > baseline else baseline
-            # 당번 횟수가 적을수록 높은 확률: weight = 1/(effective + 1)
-            weight = 1 / ((effective + 1) ** 50)
-            weights.append(weight)
-            print(f"weight: {weight}", "duty", duty, "baseline", baseline)
+            weights = []
+            for emp in eligible:
+                duty = emp.get("duty_count", 0)
+                effective = duty if duty > baseline else baseline
+                # 당번 횟수가 적을수록 높은 확률: weight = 1/(effective + 1)^50
+                weight = 1 / ((effective + 1) ** 50)
+                weights.append(weight)
+                print(f"weight: {weight}", "duty", duty, "baseline", baseline)
 
-        chosen = random.choices(eligible, weights=weights, k=1)[0]
-        selected_this_month.add(chosen["id"])
-        weekly_results.append({
-            "week": week,
-            "id": chosen["id"],
-            "name": chosen["name"],
-            "duty_count_before": chosen.get("duty_count", 0)
-        })
-        log_message(f"주차 {week}: {chosen['name']} (ID: {chosen['id']})님이 선정되었습니다.")
+            chosen = random.choices(eligible, weights=weights, k=1)[0]
+            selected_for_week.append(chosen)
+            selected_this_month.add(chosen["id"])
+            # 이미 선정된 직원은 이번 주에서 중복 선정되지 않도록 제거
+            eligible.remove(chosen)
+
+        for chosen in selected_for_week:
+            weekly_results.append({
+                "week": week,
+                "id": chosen["id"],
+                "name": chosen["name"],
+                "duty_count_before": chosen.get("duty_count", 0)
+            })
+            log_message(f"주차 {week}: {chosen['name']} (ID: {chosen['id']})님이 선정되었습니다.")
+
 
         # 당번 횟수는 즉시 증가시키지 않고, 최종 업데이트 단계에서 한 번에 처리
 
