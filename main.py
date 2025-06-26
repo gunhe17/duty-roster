@@ -159,6 +159,7 @@ def run_selection():
 
     # 최신의 database.json 불러오기
     db = load_json(DATABASE_FILE)
+    if db is None: raise
 
     # 이번 달 추첨 주차 수 입력 (예: 몇 주 동안 청소 당번을 정할 것인지)
     while True:

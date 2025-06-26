@@ -3,8 +3,8 @@
         {
             "id": 1,
             "name": "김건희",
-            "duty_count": 2,
-            "consecutive": 2
+            "duty_count": 3,
+            "consecutive": 1
         },
         {
             "id": 2,
@@ -16,37 +16,31 @@
             "id": 3,
             "name": "김주한",
             "duty_count": 2,
-            "consecutive": 1
+            "consecutive": 0
         },
         {
             "id": 4,
             "name": "김태형",
-            "duty_count": 2,
-            "consecutive": 0
+            "duty_count": 3,
+            "consecutive": 1
         },
         {
             "id": 5,
             "name": "석정도",
-            "duty_count": 2,
-            "consecutive": 1
+            "duty_count": 3,
+            "consecutive": 2
         },
         {
             "id": 6,
             "name": "소요섭",
-            "duty_count": 2,
-            "consecutive": 0
+            "duty_count": 3,
+            "consecutive": 1
         },
         {
             "id": 7,
             "name": "심기섭",
-            "duty_count": 1,
-            "consecutive": 0
-        },
-        {
-            "id": 8,
-            "name": "안예린",
             "duty_count": 2,
-            "consecutive": 0
+            "consecutive": 1
         },
         {
             "id": 9,
@@ -58,25 +52,25 @@
             "id": 10,
             "name": "이신실",
             "duty_count": 2,
-            "consecutive": 1
+            "consecutive": 0
         },
         {
             "id": 11,
             "name": "이현준",
-            "duty_count": 1,
-            "consecutive": 0
+            "duty_count": 2,
+            "consecutive": 1
         },
         {
             "id": 12,
             "name": "임소영",
-            "duty_count": 2,
-            "consecutive": 0
+            "duty_count": 3,
+            "consecutive": 1
         },
         {
             "id": 13,
             "name": "전은아",
             "duty_count": 2,
-            "consecutive": 1
+            "consecutive": 0
         },
         {
             "id": 14,
@@ -88,37 +82,37 @@
             "id": 15,
             "name": "정재인",
             "duty_count": 2,
-            "consecutive": 2
+            "consecutive": 0
         },
         {
             "id": 16,
             "name": "조수진",
-            "duty_count": 1,
-            "consecutive": 0
+            "duty_count": 2,
+            "consecutive": 1
         },
         {
             "id": 17,
             "name": "최지혜",
-            "duty_count": 1,
-            "consecutive": 0
+            "duty_count": 2,
+            "consecutive": 1
         },
         {
             "id": 18,
             "name": "최지훈",
             "duty_count": 2,
-            "consecutive": 1
+            "consecutive": 0
         },
         {
             "id": 19,
             "name": "홍성균",
             "duty_count": 2,
-            "consecutive": 1
+            "consecutive": 0
         },
         {
             "id": 20,
             "name": "홍혜린",
-            "duty_count": 1,
-            "consecutive": 0
+            "duty_count": 2,
+            "consecutive": 1
         }
     ]
 }
